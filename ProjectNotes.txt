@@ -1,0 +1,15 @@
+- Inheritance is not code sharing
+- Is-a relationship
+- Need to share common logic
+- Sharing just properties or method signature is not enough
+- Inheritance can put you in a corner
+- You need to ask the question: What is the point?
+
+We have cornered ourselves with II.Library.FaultyOO implementation
+1. Style so moved it to RentalCars and RentalTruck. Removed for RetalBoat and RentalSailBoat
+2. StartEngine and StopEngine do not apply to RentalSailBoat. So made these virtual and override 
+	with throw exception in RentalSailBoat. Which means we'll need to check the implementation throuhut the code to check for the object with "is"
+	
+A better approach is detailed in II.Library.BetterOO implementation
+
+

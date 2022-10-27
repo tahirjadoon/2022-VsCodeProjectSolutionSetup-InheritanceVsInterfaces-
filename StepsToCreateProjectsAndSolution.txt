@@ -1,0 +1,99 @@
+
+> mkdir InheritanceVsInterfaces
+> cd InheritanceVsInterfaces
+
+Create a solution
+> dotnet new sln
+The template "Solution File" was created successfully.
+This will create the solution name the same as container folder name 
+
+Create a console app
+> dotnet new console -o II.ConsoleApp
+The template "Console App" was created successfully.
+
+	Processing post-creation actions...
+	Running 'dotnet restore' on C:\data\InheritanceVsInterfaces\II.ConsoleApp\II.ConsoleApp.csproj...
+	  Determining projects to restore...
+	  Restored C:\data\InheritanceVsInterfaces\II.ConsoleApp\II.ConsoleApp.csproj (in 179 ms).
+	Restore succeeded.
+
+Add console app to the solution 
+> dotnet sln add II.ConsoleApp
+	Project `II.ConsoleApp\II.ConsoleApp.csproj` added to the solution.
+
+Create a C# class libaray project 
+> dotnet new classlib -o II.Library
+	The template "Class Library" was created successfully.
+
+	Processing post-creation actions...
+	Running 'dotnet restore' on C:\data\InheritanceVsInterfaces\II.Library\II.Library.csproj...
+	  Determining projects to restore...
+	  Restored C:\data\InheritanceVsInterfaces\II.Library\II.Library.csproj (in 128 ms).
+	Restore succeeded.
+	
+Add library to the solution 
+>dotnet sln add II.Library
+	Project `II.Library\II.Library.csproj` added to the solution.
+	
+Add reference to II.Library in II.ConsoleApp 
+> dotnet add II.ConsoleApp/II.ConsoleApp.csproj reference II.Library/II.Library.csproj
+	Reference `..\II.Library\II.Library.csproj` added to the project.
+
+II.ConsoleApp.csproj 
+	<Project Sdk="Microsoft.NET.Sdk">
+
+	  <ItemGroup>
+		<ProjectReference Include="..\II.Library\II.Library.csproj" />
+	  </ItemGroup>
+
+	  <PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	  </PropertyGroup>
+
+	</Project>
+	
+II.Library.csproj 
+	<Project Sdk="Microsoft.NET.Sdk">
+
+	  <PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	  </PropertyGroup>
+
+	</Project>
+	
+Restoring the Projects 
+
+> cd II.ConsoleApp
+InheritanceVsInterfaces\II.ConsoleApp
+> dotnet restore
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+
+> cd II.Library
+InheritanceVsInterfaces\II.Library
+> dotnet restore
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  
+Run the console app 
+	either CD into console app and isseue 
+		> dotnet build
+		> dotnet run 
+	
+	or from the main folder 
+		> dotnet --project II.ConsoleApp/II.ConsoleApp.csproj 
+		
+Actions at solution level in folder InheritanceVsInterfaces
+	> dotnet clean
+	> dotnet build 
+	
+Actions inside II.ConsoleApp 
+	> dotnet clean 
+	> dotnet build 
+	> dotnet run 
+	> dotnet watch run 
